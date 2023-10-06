@@ -23,17 +23,25 @@ public class Controller extends HttpServlet {
         }
     }
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+        String param = request.getParameter("action");
+        switch (param){
+            case "loginSubmit":
+            authenticate(request,response);
+        }
+    }
+    public void authenticate(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
         String username = request.getParameter("username");
-        String pass = request.getParameter("password");
-        if(username.equals("Ameya") && pass.equals("Surana")){
+        String password = request.getParameter("password");
+        if(username.equals("Ameya") && password.equals("Surana")){
             request.getSession().invalidate();
             HttpSession newSession = request.getSession(true);
             newSession.setMaxInactiveInterval(300);
             newSession.setAttribute("username",username);
-            response.sendRedirect("memberArea.jsp");
+            String encode = response.encodeURL(request.getContextPath());
+            response.sendRedirect(encode+"/MethodController?action=memberArea");
         }
         else{
-            getServletContext().getRequestDispatcher("/notFound.jsp").forward(request,response);
+            getServletContext().getRequestDispatcher("notFound.jsp").forward(request,response);
         }
     }
 }

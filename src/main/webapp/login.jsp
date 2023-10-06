@@ -18,6 +18,7 @@
     <br/>
     Password : <label>
     <input type="text" name="password" required>
+    <input type="hidden" value="loginSubmit" name="action">
 </label>
     <input type="submit" value="submit">
 </form>

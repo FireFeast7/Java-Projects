@@ -2,7 +2,6 @@ package com.example.helloworld;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +20,9 @@ public class MethodController extends HttpServlet {
             case "destroy":
                 request.getSession().invalidate();
                 response.sendRedirect("login.jsp");
+                break;
+            case "memberArea":
+                request.getRequestDispatcher("memberArea.jsp").forward(request,response);
                 break;
             default:
                 break;
