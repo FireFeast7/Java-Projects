@@ -17,6 +17,8 @@ public class Controller extends HttpServlet {
         } else if (param.equals("signup")) {
            // response.sendRedirect("signup.jsp");
             getServletContext().getRequestDispatcher("/signup.jsp").forward(request,response);
+        }else if(param.equals("members-only")){
+            getServletContext().getRequestDispatcher("/members-only.jsp").forward(request,response);
         }
         else{
             getServletContext().getRequestDispatcher("/notFound.jsp").forward(request,response);

@@ -24,6 +24,9 @@ public class MethodController extends HttpServlet {
             case "memberArea":
                 request.getRequestDispatcher("memberArea.jsp").forward(request,response);
                 break;
+            case "members-only":
+                request.getRequestDispatcher("members-only").forward(request,response);
+                break;
             default:
                 break;
         }
