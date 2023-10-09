@@ -8,12 +8,7 @@
 <body>
 <h1><%= "First Application!" %></h1>
 It's Home Page<br/>
-<a href="<%= request.getContextPath()%>/Controller?page=login">Login</a><br/>
-<a href="<%= request.getContextPath()%>/Controller?page=signup">Signup</a><br/>
-<a href="<%= request.getContextPath()%>/Controller?page=about-us">AboutUs</a><br/>
-<a href="<%= request.getContextPath()%>/newFile.jsp">NewFile</a><br/>
-<a href="<%= request.getContextPath()%>/getApplication.jsp">Get</a><br/>
-<a href="<%= request.getContextPath()%>/setApplication.jsp">Set</a><br/>
+
 
 </body>
 </html>
