@@ -8,8 +8,11 @@
     <meta name="author" content="">
 
 
-    <title>${param.title}</title>
-
+    <title><% if(request.getAttribute("title")==null){
+        out.print("HomePage");
+    }else {
+  out.print(request.getAttribute("title"));
+}%></title>
     <!-- Bootstrap core CSS -->
     <link href="include/assets/css/bootstrap.css" rel="stylesheet">
 
@@ -37,12 +40,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">SOLID.</a>
+          <a class="navbar-brand" href="${pageContext.request.contextPath}/site?page=home">SOLID.</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li><a href="${pageContext.request.contextPath}/home?">HOME</a> </li>
-            <li><a href="${pageContext.request.contextPath}/home?page=list-users">List Users</a> </li>
+            <li><a href="${pageContext.request.contextPath}/site?page=home">HOME</a> </li>
+            <li><a href="${pageContext.request.contextPath}/operation?page=list-users">List Users</a> </li>
+            <li><a href="${pageContext.request.contextPath}/operation?page=add-user">Add Users</a> </li>
+
 
           </ul>
             </li>

@@ -1,11 +1,10 @@
 package com.example.helloworld;
 
+import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
+
 import javax.sql.DataSource;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 public class UsersModel {
 
@@ -25,5 +24,18 @@ public class UsersModel {
         }
         return listUsers;
 
+    }
+
+    public Boolean addUser(User newUser , DataSource dataSource) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement  = null;
+        connection = dataSource.getConnection();
+        String username = newUser.getUsername();
+        String email  = newUser.getEmail();
+        String query = "INSERT INTO STUDYEASY (USERNAME,EMAIL) VALUES (?,?)";
+        statement = connection.prepareStatement(query);
+        statement.setString(1,username);
+        statement.setString(2,email);
+        return statement.execute();
     }
 }
