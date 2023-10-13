@@ -15,10 +15,6 @@ import java.io.IOException;
 public class Demo extends HttpServlet {
     @Resource(name = "jdbc/project")
     private DataSource dataSource;
-    @Override
-    public void init() throws ServletException {
-        super.init();
-    }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             Connection connection = null;
@@ -29,6 +25,7 @@ public class Demo extends HttpServlet {
             String query = "SELECT * FROM studyeasy";
             stmt = connection.createStatement();
             rs = stmt.executeQuery(query);
+
             while (rs.next()){
                 out.println("<br/>"+rs.getString("email"));
             }
