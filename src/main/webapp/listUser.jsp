@@ -19,14 +19,22 @@
                 <th>User Id</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Update</th>
                 </thead>
                 <%
                     List<User> listUs = (List<User>) request.getAttribute("listUsers");
+                    String tempURL;
                     for(int i = 0;i<listUs.size();i++){
                         out.print("<tr>");
                         out.println("<td>"+listUs.get(i).getUsers_id()+"</td>");
                         out.println("<td>"+listUs.get(i).getEmail()+"</td>");
                         out.println("<td>"+listUs.get(i).getUsername()+"</td>");
+                        tempURL = request.getContextPath()+"/operation?page=update-user" +
+                                "&user_id="+listUs.get(i).getUsers_id()+
+                                "&username="+listUs.get(i).getUsername()+
+                                "&email="+listUs.get(i).getEmail();
+                        out.println("<td><a href="+tempURL+">Update</a></td>");
+
                         out.print("</tr>");
                     }
 
@@ -35,4 +43,4 @@
         </div>
     </div>
 </div>
-<%@ include file="include/header.jsp"%>
+<%@ include file="include/footer.jsp"%>

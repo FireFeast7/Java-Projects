@@ -1,9 +1,6 @@
 package com.example.helloworld;
 
-import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
-
 import javax.sql.DataSource;
-import java.io.PrintWriter;
 import java.sql.*;
 import java.util.*;
 public class UsersModel {
@@ -37,5 +34,20 @@ public class UsersModel {
         statement.setString(1,username);
         statement.setString(2,email);
         return statement.execute();
+    }
+
+    public void updateUser(User upUser, DataSource dataSource) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement  = null;
+        connection = dataSource.getConnection();
+        String username = upUser.getUsername();
+        int user_id = upUser.getUsers_id();
+        String email  = upUser.getEmail();
+        String query = "UPDATE STUDYEASY SET USERNAME = ? , EMAIL = ? WHERE USER_ID = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1,username);
+        statement.setString(2,email);
+        statement.setInt(3,user_id);
+        statement.execute();
     }
 }

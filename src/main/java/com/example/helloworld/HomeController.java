@@ -28,7 +28,8 @@ public class HomeController extends HttpServlet {
             case "add-user":
                 addUser(request,response);
                 break;
-
+            case "update-user":
+                UpdateUser(request,response);
         }
     }
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
@@ -42,11 +43,23 @@ public class HomeController extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+            case "update-userops":
+                User upUser = new User(Integer.parseInt(request.getParameter("user_id")),request.getParameter("username"),request.getParameter("email")   );
+                try {
+                    updateUserOperation(upUser);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
             default:
                 request.getRequestDispatcher("error.jsp").forward(request, response);
                 request.setAttribute("title", "ErrorPage");
                 break;
         }
+    }
+
+    private void updateUserOperation(User upUser) throws SQLException {
+        new UsersModel().updateUser(upUser,dataSource);
     }
 
     private void addUserOperation(User newUser) throws SQLException {
@@ -69,6 +82,11 @@ public class HomeController extends HttpServlet {
     }
     public void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("addUser.jsp").forward(request, response);
+    }
+
+    public void UpdateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title","Update User");
+            request.getRequestDispatcher("updateUser.jsp").forward(request,response);
     }
 
 
