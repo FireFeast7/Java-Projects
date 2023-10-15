@@ -11,8 +11,8 @@ public class App {
         try{
             Users user = new Users();
             session.beginTransaction();
-            user = session.get(Users.class,2);
-            user.setUsername("Martin");
+            user = session.get(Users.class,1);
+            session.delete(user);
             session.getTransaction().commit();
             System.out.println(user);
         }finally {
