@@ -48,7 +48,7 @@
             <li><a href="${pageContext.request.contextPath}/operation?page=list-users">List Users</a> </li>
             <li><a href="${pageContext.request.contextPath}/operation?page=add-user">Add Users</a> </li>
             <li><a href="${pageContext.request.contextPath}/operation?page=update-user">Update User Info</a> </li>
-
+            <li><a href="${pageContext.request.contextPath}/site?page=image-upload">Image Upload</a> </li>
           </ul>
             </li>
           </ul>

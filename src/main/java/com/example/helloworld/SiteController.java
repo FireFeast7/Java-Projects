@@ -17,13 +17,21 @@ public class SiteController extends HttpServlet {
             case "home":
                 homepage(request, response);
                 break;
+            case "image-upload":
+                upload(request,response);
             default:
                 request.getRequestDispatcher("error.jsp").forward(request, response);
                 request.setAttribute("title", "ErrorPage");
                 break;
         }
     }
-        public void homepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("uploadImage.jsp").forward(request,response);
+        request.setAttribute("title","Image Upload");
+    }
+
+    public void homepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.getRequestDispatcher("index.jsp").forward(request, response);
             request.setAttribute("title", "HomePage");
         }
