@@ -12,6 +12,7 @@ public class App {
             Users user = new Users();
             session.beginTransaction();
             user = session.get(Users.class,2);
+            user.setUsername("Martin");
             session.getTransaction().commit();
             System.out.println(user);
         }finally {
