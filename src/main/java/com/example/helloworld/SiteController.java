@@ -18,7 +18,6 @@ public class SiteController extends HttpServlet {
                 homepage(request, response);
                 break;
             default:
-
                 request.getRequestDispatcher("error.jsp").forward(request, response);
                 request.setAttribute("title", "ErrorPage");
                 break;

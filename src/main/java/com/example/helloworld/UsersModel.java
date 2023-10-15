@@ -50,4 +50,15 @@ public class UsersModel {
         statement.setInt(3,user_id);
         statement.execute();
     }
+
+    public void deleteUser(User delUser, DataSource dataSource) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement  = null;
+        connection = dataSource.getConnection();
+        int user_id = delUser.getUsers_id();
+        String query = "DELETE FROM STUDYEASY WHERE USER_ID = ?";
+        statement = connection.prepareStatement(query);
+        statement.setInt(1,user_id);
+        statement.execute();
+    }
 }

@@ -30,8 +30,15 @@ public class HomeController extends HttpServlet {
                 break;
             case "update-user":
                 UpdateUser(request,response);
+                break;
+            case "delete-user":
+                deleteUser(request,response);
+                break;
         }
     }
+
+
+
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
         String form = request.getParameter("form");
         form = form.toLowerCase();
@@ -43,6 +50,7 @@ public class HomeController extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+                break;
             case "update-userops":
                 User upUser = new User(Integer.parseInt(request.getParameter("user_id")),request.getParameter("username"),request.getParameter("email")   );
                 try {
@@ -50,12 +58,30 @@ public class HomeController extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
+                break;
+            case "delete-userops":
+                String confirmation = request.getParameter("confirmation");
+                if(confirmation.equals("yes")) {
+                    User delUser = new User(Integer.parseInt(request.getParameter("user_id")));
+                    try {
+                        deleteUserOperation(delUser);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else{
+                    request.getRequestDispatcher("index.jsp").forward(request,response);
+                }
+                break;
             default:
                 request.getRequestDispatcher("error.jsp").forward(request, response);
                 request.setAttribute("title", "ErrorPage");
                 break;
         }
+    }
+
+    private void deleteUserOperation(User delUser) throws SQLException {
+        new UsersModel().deleteUser(delUser,dataSource);
     }
 
     private void updateUserOperation(User upUser) throws SQLException {
@@ -81,12 +107,18 @@ public class HomeController extends HttpServlet {
         request.getRequestDispatcher("listUser.jsp").forward(request, response);
     }
     public void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title", "Add User");
         request.getRequestDispatcher("addUser.jsp").forward(request, response);
     }
 
     public void UpdateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("title","Update User");
-            request.getRequestDispatcher("updateUser.jsp").forward(request,response);
+        request.getRequestDispatcher("updateUser.jsp").forward(request,response);
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title", "Delete User");
+        request.getRequestDispatcher("deleteUser.jsp").forward(request,response);
     }
 
 
