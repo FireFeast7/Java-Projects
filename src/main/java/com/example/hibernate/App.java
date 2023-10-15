@@ -9,11 +9,11 @@ public class App {
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Users.class).buildSessionFactory();
         Session session = factory.getCurrentSession();
         try{
-            Users user = new Users("username","email","firstName","lastName");
+            Users user = new Users();
             session.beginTransaction();
-            session.save(user);
+            user = session.get(Users.class,2);
             session.getTransaction().commit();
-            System.out.println("Row Added");
+            System.out.println(user);
         }finally {
             session.close();
             factory.close();
