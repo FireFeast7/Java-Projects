@@ -10,10 +10,8 @@ public class App {
         Session session = factory.getCurrentSession();
         try{
             session.beginTransaction();
-           List<Users> users = session.createQuery("from users where  lastName like '%a%t%' ").getResultList();
-            for(Users temp : users) {
-                System.out.println(temp);
-            }
+           session.createQuery("update users set email = '1235@gmail.com' where username = 'Martin'").executeUpdate();
+           session.getTransaction().commit();
         }finally {
             session.close();
             factory.close();
