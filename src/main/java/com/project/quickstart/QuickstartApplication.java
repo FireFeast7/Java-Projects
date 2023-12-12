@@ -4,13 +4,17 @@ import lombok.extern.java.Log;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
 
 @SpringBootApplication
 @Log
 public class QuickstartApplication implements CommandLineRunner {
-	private PizzaConfig pizzaConfig;
-	QuickstartApplication(PizzaConfig pizzaConfig){
-		this.pizzaConfig = pizzaConfig;
+	private final DataSource dataSource;
+
+	public QuickstartApplication(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	public static void main(String[] args) {
@@ -20,6 +24,8 @@ public class QuickstartApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		log.info(pizzaConfig.toString());
+		log.info("DataSource : "+dataSource.toString());
+		final JdbcTemplate restTemplate = new JdbcTemplate(dataSource);
+		restTemplate.execute("select 1");
 	}
 }
