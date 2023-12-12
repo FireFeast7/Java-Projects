@@ -1,7 +1,9 @@
 package com.project.quickstart.impl;
 
 import com.project.quickstart.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ColorPrinterImpl implements ColorPrinter {
     private RedPrinter redPrinter;
     private BluePrinter bluePrinter;
