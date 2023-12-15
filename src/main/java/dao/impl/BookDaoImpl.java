@@ -37,6 +37,7 @@ public class BookDaoImpl implements BookDao {
         return results;
     }
 
+
     public static class BookRowMapper implements RowMapper{
 
         @Override
