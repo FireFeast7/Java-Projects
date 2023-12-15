@@ -1,8 +1,12 @@
-drop table if exists "widgets";
-
-
-create table "widgets" (
-    "id" int primary key,
+create table "authors" (
+    "id" bigint primary key,
     "name" text,
-    "purpose" text
+    "age" integer
+);
+
+create table "books"(
+    "isbn" text not null ,
+    "title" text,
+    "author_id" bigint,
+    foreign key (author_id) references authors(id)
 );
