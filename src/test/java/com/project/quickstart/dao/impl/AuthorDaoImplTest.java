@@ -46,4 +46,12 @@ public class AuthorDaoImplTest {
                 ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any(),
                 eq(1L) );
     }
+
+    @Test
+    public void findMany(){
+        underTest.findMany();
+        verify(jdbcTemplate).query(
+                eq("SELECT id, name, age FROM authors"),
+                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any());
+    }
 }

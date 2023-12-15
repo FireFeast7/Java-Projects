@@ -39,6 +39,15 @@ public class BookDaoImplTest {
                 ArgumentMatchers.<BookDaoImpl.BookRowMapper>any(),
                 eq(1L));
     }
+    @Test
+    public void findMany(){
+        underTest.findMany();
+        verify(jdbcTemplate).query(
+                eq("SELECT author_id, isbn, title from books"),
+                ArgumentMatchers.<BookDaoImpl.BookRowMapper>any()
+        );
+
+    }
 
 
 }
