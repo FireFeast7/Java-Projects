@@ -1,10 +1,11 @@
-package com.project.quickstart.dao;
+package com.project.quickstart.dao.impl;
 
 import dao.BookDao;
 import dao.impl.BookDaoImpl;
 import domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -29,6 +30,14 @@ public class BookDaoImplTest {
         underTest.create(book);
         verify(jdbcTemplate).update(eq("INSERT INTO books (author_id, isbn, title) VALUES (?, ?, ?)")
                 ,eq(1L),eq("1800-6969-6969"),eq("The Monk who Sold his Ferrari"));
+    }
+    @Test
+    public void readOne(){
+        underTest.findOne(1L);
+        verify(jdbcTemplate).query(
+                eq("select author_id, isbn, title from books where author_id = ?"),
+                ArgumentMatchers.<BookDaoImpl.BookRowMapper>any(),
+                eq(1L));
     }
 
 
