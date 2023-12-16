@@ -46,7 +46,11 @@ public class BookDaoImplTest {
                 eq("SELECT author_id, isbn, title from books"),
                 ArgumentMatchers.<BookDaoImpl.BookRowMapper>any()
         );
-
+    }
+    @Test
+    public void delete(){
+        underTest.delete(1L);
+        verify(jdbcTemplate).update("DELETE FROM books WHERE id = ?",1L);
     }
 
 

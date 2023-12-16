@@ -10,4 +10,5 @@ public interface BookDao {
     Optional<Book> findOne(long l);
     List<Book> findMany();
 
+    void delete(long l);
 }
