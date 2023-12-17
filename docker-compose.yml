@@ -1,10 +1,18 @@
-version: '3.1'
+version: '3.9'
 
 services:
-  db:
-    image: postgres
+  devtiro:
+    container_name: new_db
+    image: postgres:12
     ports:
-      - "5433:5433"
-    restart: always
+      - 5432:5432
     environment:
-      POSTGRES_PASSWORD: root123
+       POSTGRES_USERNAME: postgres
+       POSTGRES_PASSWORD: root123
+       POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
+
