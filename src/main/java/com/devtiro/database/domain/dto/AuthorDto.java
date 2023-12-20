@@ -3,8 +3,7 @@ package com.devtiro.database.domain.dto;
 import lombok.*;
 
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
